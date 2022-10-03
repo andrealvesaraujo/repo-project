@@ -3,6 +3,8 @@ import {FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa'
 import {Container, Form, List, SubmitButton, DeleteButton} from './styles'
 import api from '../../services/api'
 
+import {Link} from 'react-router-dom' 
+
 export default function Main() {
 
   const [newRepo, setNewRepo] = useState('')
@@ -12,10 +14,8 @@ export default function Main() {
 
   useEffect(()=>{
     const repoStorage = localStorage.getItem('repos')
-    console.log(repoStorage)
     if(repoStorage){
-      console.log('repoStorage')
-      setRepositorios(JSON.parse(repoStorage))
+        setRepositorios(JSON.parse(repoStorage))
     }
   },[])
 
@@ -108,9 +108,9 @@ export default function Main() {
                   </DeleteButton>
                   {repo.name}
                 </span>
-                <a href=''>
+                <Link to={`/repositorio/${encodeURIComponent(repo.name)}`}>
                   <FaBars size={20} />
-                </a>
+                </Link>
               </li>
             ))}
       </List>
